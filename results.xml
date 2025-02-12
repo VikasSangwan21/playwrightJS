@@ -1,0 +1,55 @@
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="62.54951399999997">
+<testsuite name="sgwCalculator.test.js" timestamp="2025-02-19T18:07:33.917Z" hostname="Chrome" tests="1" failures="1" skipped="0" time="60.446" errors="0">
+<testcase name="Verify payout for user with 0-1 property and income ≤ $22,000" classname="sgwCalculator.test.js" time="60.446">
+<failure message="sgwCalculator.test.js:7:7 Verify payout for user with 0-1 property and income ≤ $22,000" type="FAILURE">
+<![CDATA[  [Chrome] › sgwCalculator.test.js:7:7 › Verify payout for user with 0-1 property and income ≤ $22,000 
+
+    Test timeout of 60000ms exceeded.
+
+    Error: locator.waitFor: Test timeout of 60000ms exceeded.
+    Call log:
+      - waiting for locator('[value="No"]') to be visible
+        113 × locator resolved to hidden <input value="No" type="radio" aria-checked="false" aria-invalid="false" name="property.ownsMoreThanOneProperty"/>
+
+
+       at ..\pages\CalculatorPage.js:35
+
+      33 |     await this.page.getByRole('option', { name: propertyOwnership }).click();
+      34 |     await this.page.locator('.radios-container').scrollIntoViewIfNeeded();
+    > 35 |     await this.page.locator(`[value="No"]`).waitFor({ state: 'visible' });
+         |                                             ^
+      36 |     await this.page.locator('.radios-container').getByLabel('No').click();
+      37 |     //await this.page.locator('.radios-container > label > input').nth(0).click();
+      38 |     //await this.page.locator(`[value='${multipleProperty}']`).click({ force: true });
+        at CalculatorPage.enterUserDetails (C:\Users\user\Desktop\Playwright\pages\CalculatorPage.js:35:45)
+        at C:\Users\user\Desktop\Playwright\tests\sgwCalculator.test.js:9:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sgwCalculator-Verify-payou-e8d9d-roperty-and-income-≤-22-000-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\sgwCalculator-Verify-payou-e8d9d-roperty-and-income-≤-22-000-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\sgwCalculator-Verify-payou-e8d9d-roperty-and-income-≤-22-000-Chrome\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\sgwCalculator-Verify-payou-e8d9d-roperty-and-income-≤-22-000-Chrome\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+]]>
+</failure>
+<system-out>
+<![CDATA[
+[[ATTACHMENT|test-results\sgwCalculator-Verify-payou-e8d9d-roperty-and-income-≤-22-000-Chrome\test-failed-1.png]]
+
+[[ATTACHMENT|test-results\sgwCalculator-Verify-payou-e8d9d-roperty-and-income-≤-22-000-Chrome\video.webm]]
+
+[[ATTACHMENT|test-results\sgwCalculator-Verify-payou-e8d9d-roperty-and-income-≤-22-000-Chrome\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
