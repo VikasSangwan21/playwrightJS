@@ -9,7 +9,7 @@ class CalculatorPage extends BasePage {
     this.incomeInput = "[name='assessableIncome']";
     this.propertyDropdown = "[name='propertyOwnership']";
     this.submitButton = "text=Show estimated benefits";
-    this.payoutAmount = ".payout-amount";
+    this.cashAssurancePackagePayoutAmount = "(//span[text()='Cash - Assurance Package']/parent::a/parent::div/parent::div/parent::div)[1]/span";
 
     this.birthYearDD = ".react-select__input-container";
     this.incomeDD = "#personalInfo\\.assessableIncome-container";
@@ -23,6 +23,8 @@ class CalculatorPage extends BasePage {
   }
 
   async enterUserDetails({ birthYear, income, multipleProperty, housing, propertyOwnership }) {
+    
+
     await this.page.locator(this.birthYearDD).click();
     await this.page.getByText(birthYear).click();
     await this.page.locator(this.incomeDD).click();
@@ -32,18 +34,19 @@ class CalculatorPage extends BasePage {
     await this.page.locator(this.propertyOwnershipDD).click();
     await this.page.getByRole('option', { name: propertyOwnership }).click();
     await this.page.locator('.radios-container').scrollIntoViewIfNeeded();
-    await this.page.locator(`[value="No"]`).waitFor({ state: 'visible' });
-    await this.page.locator('.radios-container').getByLabel('No').click();
-    //await this.page.locator('.radios-container > label > input').nth(0).click();
-    //await this.page.locator(`[value='${multipleProperty}']`).click({ force: true });
+    if(multipleProperty === "No"){
+      await this.page.getByRole('group', { name: 'Do you own more than 1' }).locator('div').nth(2).click();
+    }else{
+      await this.page.getByRole('group', { name: 'Do you own more than 1' }).locator('div').nth(4).click();
+    }
   }
 
   async submitForm() {
     await this.page.click(this.submitButton);
   }
 
-  async getPayout() {
-    return await this.page.textContent(this.payoutAmount);
+  async getCashAssurancePayout() {
+    return await this.page.textContent(this.cashAssurancePackagePayoutAmount);
   }
 }
 
