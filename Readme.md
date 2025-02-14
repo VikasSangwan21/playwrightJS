@@ -70,3 +70,12 @@ Allure-test-report :
 2.	npm run test:firefox (OR) npm run test:safari
 3.	npm run allure:report
 ```
+
+#### Features
+- Screenshot for failing tests
+- Video recording for failing tests
+- CI integration implemented with jenkins
+- Page object model
+- Separate Test Data files for easy maintenance
+- Reusable fixtures for scalability
+- Allure reporting
