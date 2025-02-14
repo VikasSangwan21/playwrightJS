@@ -18,8 +18,13 @@ class CalculatorPage extends BasePage {
     this.incomeDD = "#personalInfo\\.assessableIncome-container";
     this.housingDropdown = "[id=\"property\\.typeOfPropertyOfResidence-container\"] div";
     this.propertyOwnershipDD = "#property\\.ownsPropertyOfResidence-container"
-
     this.errorMessage = 'text=This is a required field.'
+
+    // Family Member
+    this.birthYearFamilyMemberDD = '[id="member\\.0\\.yearOfBirth-container"] svg'
+    this.incomFamilyMemberDD = '[id="member\\.0\\.assessableIncome-container"]';
+    this.addFamilyMemberButton = 'Add household member'
+
   }
 
   async startCalculator() {
@@ -28,8 +33,6 @@ class CalculatorPage extends BasePage {
   }
 
   async enterUserDetails({ birthYear, income, multipleProperty, housing, propertyOwnership }) {
-    
-
     await this.page.locator(this.birthYearDD).click();
     await this.page.getByText(birthYear).click();
     if(income !== ""){
@@ -67,14 +70,13 @@ class CalculatorPage extends BasePage {
 
   async verfyErrorMessages() {
     const errorMessages = await this.page.locator('text=This is a required field.');
-      //const errorMessages = calculatorPage.getErrorMessages(); 
     
-      // Verify that exactly 4 elements are found
-      await expect(errorMessages).toHaveCount(4);
-    
-      // Verify all 4 elements are visible
-      for (let i = 0; i < 4; i++) {
-          await expect(errorMessages.nth(i)).toBeVisible();
+    // Verify that exactly 4 elements are found
+    await expect(errorMessages).toHaveCount(4);
+  
+    // Verify all 4 elements are visible
+    for (let i = 0; i < 4; i++) {
+        await expect(errorMessages.nth(i)).toBeVisible();
     }
   }
 
@@ -82,6 +84,17 @@ class CalculatorPage extends BasePage {
     await this.page.locator(`//button/span[text()='${year}']`).click();
   }
 
+  async addFamilyMember({ birthYear, income, multipleProperty, housing, propertyOwnership }) {
+    await this.page.getByRole('button', { name: this.addFamilyMemberButton }).click();
+    await this.page.locator(this.birthYearFamilyMemberDD).click();
+    await this.page.getByText(birthYear).click();
+    await this.page.locator(this.incomFamilyMemberDD).click();
+    await this.page.getByRole('option', { name: income }).click();
+  }
+
 }
+
+
+
 
 module.exports = CalculatorPage;

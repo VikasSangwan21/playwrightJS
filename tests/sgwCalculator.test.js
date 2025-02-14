@@ -120,4 +120,15 @@ test("Verify Errors for Incomplete Inputs", async ({ calculatorPage }) => {
   const errorMessages = calculatorPage.verfyErrorMessages(); 
 });
 
+// Verify Cash Assurance Payout is not displayed for age <20 with additional family member
+test("Verify Cash Assurance Payout is not displayed for age <20 with additional family member", async ({ calculatorPage }) => {
+  await calculatorPage.startCalculator();
+  await calculatorPage.enterUserDetails(testData.belowAgeLimit);
+  await calculatorPage.addFamilyMember(testData.familyMember1);
+  await calculatorPage.submitForm();
+  const payout = await calculatorPage.getCashAssurancePayoutElement();
+  await expect(payout).not.toBeVisible();
+
+});
+
 
