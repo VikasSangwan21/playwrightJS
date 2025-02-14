@@ -25,7 +25,7 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test --reporter=html'
+                bat 'npm run test:chromeCI'
             }
         }
 

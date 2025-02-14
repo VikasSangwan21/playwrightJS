@@ -19,6 +19,17 @@ export const projects = [
 		}
 	},
 	{
+		name: `ChromeHeadless`,
+		use: {
+			browserName: `chromium`,
+			channel: `chrome`,
+			headless: true,
+			screenshot: `only-on-failure`,
+			video: `retain-on-failure`,
+			trace: `retain-on-failure`
+		}
+	},
+	{
 		name: `Firefox`,
 		use: {
 			browserName: `firefox`,
