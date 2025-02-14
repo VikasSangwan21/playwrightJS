@@ -10,6 +10,7 @@ class CalculatorPage extends BasePage {
     this.propertyDropdown = "[name='propertyOwnership']";
     this.submitButton = "text=Show estimated benefits";
     this.cashAssurancePackagePayoutAmount = "(//span[text()='Cash - Assurance Package']/parent::a/parent::div/parent::div/parent::div)[1]/span";
+    this.cashAssurancePackagePayoutAmount2026 = '[id="2026-You-payout"]';
 
     this.birthYearDD = ".react-select__input-container";
     this.incomeDD = "#personalInfo\\.assessableIncome-container";
@@ -27,8 +28,10 @@ class CalculatorPage extends BasePage {
 
     await this.page.locator(this.birthYearDD).click();
     await this.page.getByText(birthYear).click();
-    await this.page.locator(this.incomeDD).click();
-    await this.page.getByRole('option', { name: income }).click();
+    if(income !== ""){
+      await this.page.locator(this.incomeDD).click();
+      await this.page.getByRole('option', { name: income }).click();
+    }
     await this.page.locator(this.housingDropdown).nth(3).click();
     await this.page.getByRole('option', { name: housing }).click();
     await this.page.locator(this.propertyOwnershipDD).click();
@@ -45,9 +48,22 @@ class CalculatorPage extends BasePage {
     await this.page.click(this.submitButton);
   }
 
-  async getCashAssurancePayout() {
-    return await this.page.textContent(this.cashAssurancePackagePayoutAmount);
+  async getCashAssurancePayout(year) {
+    if(year === '2025'){
+      return await this.page.textContent(this.cashAssurancePackagePayoutAmount);
+    }else {
+      return await this.page.textContent(this.cashAssurancePackagePayoutAmount2026);
+    }
   }
+
+  async getCashAssurancePayoutElement() {
+    return await this.page.locator(this.cashAssurancePackagePayoutAmount);
+  }
+
+  async selectYear(year) {
+    await this.page.locator(`//button/span[text()='${year}']`).click();
+}
+
 }
 
 module.exports = CalculatorPage;
