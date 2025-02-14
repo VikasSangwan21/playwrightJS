@@ -1,60 +1,62 @@
-<testsuites id="" name="" tests="9" failures="0" skipped="0" errors="0" time="82.9253">
-<testsuite name="sgwCalculator.test.js" timestamp="2025-02-14T05:29:10.549Z" hostname="Chrome" tests="9" failures="0" skipped="0" time="81.788" errors="0">
-<testcase name="Verify Cash Assurance Payout is not displayed for age &lt;20" classname="sgwCalculator.test.js" time="8.614">
-</testcase>
-<testcase name="Verify payout for user with 0-1 property and income ≤ $22,000" classname="sgwCalculator.test.js" time="9.737">
-<system-out>
-<![CDATA[Payout validated successfully!$600
-Payout validated successfully!$250
+<testsuites id="" name="" tests="1" failures="1" skipped="0" errors="0" time="8.029142999999982">
+<testsuite name="sgwCalculator.test.js" timestamp="2025-02-14T15:27:07.599Z" hostname="Chrome" tests="1" failures="1" skipped="0" time="6.147" errors="0">
+<testcase name="Test example for failing tests" classname="sgwCalculator.test.js" time="6.147">
+<failure message="sgwCalculator.test.js:146:5 Test example for failing tests" type="FAILURE">
+<![CDATA[  [Chrome] › sgwCalculator.test.js:146:5 › Test example for failing tests ──────────────────────────
+
+    Error: locator.click: Error: strict mode violation: getByText('') resolved to 234 elements:
+        1) <div class="Toastify"></div> aka locator('.Toastify')
+        2) <path fill="#D43328" d="M1.84449 11.5617C1.53824 11.8679 1.53824 12.3054 1.80074 12.5679L3.28824 14.0554C3.59449 14.3179 4.03199 14.3617 4.29449 14.0992C4.60074 13.7929 4.90699 13.5304 5.25699 13.3117L2.41324 11.0804C2.19449 11.2554 2.01949 11.3867 1.84449 11.5617ZM22.4507 19.5242L24.4632 17.5554C24.7257 17.2929 24.7257 16.8117 24.4195 16.5492C21.5757 14.0117 17.9007 12.9179 14.357 13.2679L10.7257 10.4679C16.2382 8.7617 22.407 9.9867 26.9132 14.0992C27.2195 14.3617 27.6132 14.3179 27.9195 14.0554L29…></path> aka locator('#root div').filter({ hasText: 'No internet connectionConnect to the internet and try again.[Important notice]' }).locator('path').first()
+        3) <span class="StyledSpan-sc-1yqr1pc-0 kkCTqU">No internet connection</span> aka getByText('No internet connection')
+        4) <span class="StyledSpan-sc-1yqr1pc-0 dVdKwr">Connect to the internet and try again.</span> aka getByText('Connect to the internet and')
+        5) <path fill="#DF2573" d="M16 2C8.26613 2 2 8.32258 2 16C2 23.7339 8.26613 30 16 30C23.6774 30 30 23.7339 30 16C30 8.32258 23.6774 2 16 2ZM16 8.20968C17.2984 8.20968 18.371 9.28226 18.371 10.5806C18.371 11.9355 17.2984 12.9516 16 12.9516C14.6452 12.9516 13.629 11.9355 13.629 10.5806C13.629 9.28226 14.6452 8.20968 16 8.20968ZM19.1613 22.5484C19.1613 22.9435 18.8226 23.2258 18.4839 23.2258H13.5161C13.121 23.2258 12.8387 22.9435 12.8387 22.5484V21.1935C12.8387 20.8548 13.121 20.5161 13.5161 20.5161H14.19…></path> aka locator('#root div').filter({ hasText: 'No internet connectionConnect to the internet and try again.[Important notice]' }).locator('path').nth(1)
+        6) <span class="StyledSpan-sc-1yqr1pc-0 dVdKwr">[Important notice] Use only the official SupportG…</span> aka getByText('[Important notice] Use only')
+        7) <span class="StyledSpan-sc-1yqr1pc-0 dVdKwr">Always check that links to government websites en…</span> aka getByText('Always check that links to')
+        8) <span class="StyledSpan-sc-1yqr1pc-0 dVdKwr"></span> aka locator('#root div').filter({ hasText: 'No internet connectionConnect to the internet and try again.[Important notice]' }).locator('span').nth(4)
+        9) <path stroke="#4E4E4E" stroke-width="4" stroke-linecap="round" d="M26.668 5.33362L5.33385 26.6677"></path> aka getByRole('button', { name: 'Close sitewide banner' })
+        10) <path stroke="#4E4E4E" stroke-width="4" stroke-linecap="round" d="M26.668 26.6675L5.33385 5.33336"></path> aka getByRole('button', { name: 'Close sitewide banner' })
+        ...
+
+    Call log:
+      - waiting for getByText('')
+
+
+       at ..\pages\CalculatorPage.js:38
+
+      36 |   async enterUserDetails({ birthYear, income, multipleProperty, housing, propertyOwnership }) {
+      37 |     await this.page.locator(this.birthYearDD).click();
+    > 38 |     await this.page.getByText(birthYear).click();
+         |                                          ^
+      39 |     if(income !== ""){
+      40 |       await this.page.locator(this.incomeDD).click();
+      41 |       await this.page.getByRole('option', { name: income }).click();
+        at CalculatorPage.enterUserDetails (C:\Users\user\Desktop\Playwright\pages\CalculatorPage.js:38:42)
+        at C:\Users\user\Desktop\Playwright\tests\sgwCalculator.test.js:148:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sgwCalculator-Test-example-for-failing-tests-Chrome\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\sgwCalculator-Test-example-for-failing-tests-Chrome\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\sgwCalculator-Test-example-for-failing-tests-Chrome\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\sgwCalculator-Test-example-for-failing-tests-Chrome\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
 ]]>
-</system-out>
-</testcase>
-<testcase name="Verify payout for user with 0-1 property and income  $22,001 - $34,000" classname="sgwCalculator.test.js" time="8.805">
+</failure>
 <system-out>
-<![CDATA[Payout validated successfully!$600
-Payout validated successfully!$250
-]]>
-</system-out>
-</testcase>
-<testcase name="Verify payout for user with 0-1 property and income $34,001 - $100,000" classname="sgwCalculator.test.js" time="8.694">
-<system-out>
-<![CDATA[Payout validated successfully!$350
-Payout validated successfully!$150
-]]>
-</system-out>
-</testcase>
-<testcase name="Verify payout for user with 0-1 property and income &gt; $100,000" classname="sgwCalculator.test.js" time="9.691">
-<system-out>
-<![CDATA[Payout validated successfully!$100
-Payout validated successfully!$100
-]]>
-</system-out>
-</testcase>
-<testcase name="Verify payout for user with &gt;1 property and income ≤ $22,000" classname="sgwCalculator.test.js" time="9.621">
-<system-out>
-<![CDATA[Payout validated successfully!$100
-Payout validated successfully!$100
-]]>
-</system-out>
-</testcase>
-<testcase name="Verify payout for user with more than 1 property and income $22,001 - $34,000" classname="sgwCalculator.test.js" time="8.605">
-<system-out>
-<![CDATA[Payout validated successfully!$100
-Payout validated successfully!$100
-]]>
-</system-out>
-</testcase>
-<testcase name="Verify payout for user with more than 1 property, Income $34,001 - $100,000" classname="sgwCalculator.test.js" time="8.536">
-<system-out>
-<![CDATA[Payout validated successfully!$100
-Payout validated successfully!$100
-]]>
-</system-out>
-</testcase>
-<testcase name="Verify payout for user with &gt;1 property and income &gt; $100,000" classname="sgwCalculator.test.js" time="9.485">
-<system-out>
-<![CDATA[Payout validated successfully!$100
-Payout validated successfully!$100
+<![CDATA[
+[[ATTACHMENT|test-results\sgwCalculator-Test-example-for-failing-tests-Chrome\test-failed-1.png]]
+
+[[ATTACHMENT|test-results\sgwCalculator-Test-example-for-failing-tests-Chrome\video.webm]]
+
+[[ATTACHMENT|test-results\sgwCalculator-Test-example-for-failing-tests-Chrome\trace.zip]]
 ]]>
 </system-out>
 </testcase>

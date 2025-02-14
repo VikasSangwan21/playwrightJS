@@ -62,14 +62,6 @@ Html-test-report :
 npm run test:chrome (OR)  npm run test:edge (OR) npm run html-report
 ```
 
-#### Allure Test Report
-
-```bash
-Allure-test-report :
-1.	npm run allure:clean
-2.	npm run test:firefox (OR) npm run test:safari
-3.	npm run allure:report
-```
 
 #### Features
 - Screenshot for failing tests
@@ -78,4 +70,3 @@ Allure-test-report :
 - Page object model
 - Separate Test Data files for easy maintenance
 - Reusable fixtures for scalability
-- Allure reporting
