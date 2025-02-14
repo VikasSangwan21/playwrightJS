@@ -24,6 +24,7 @@ class CalculatorPage extends BasePage {
     this.birthYearFamilyMemberDD = '[id="member\\.0\\.yearOfBirth-container"] svg'
     this.incomFamilyMemberDD = '[id="member\\.0\\.assessableIncome-container"]';
     this.addFamilyMemberButton = 'Add household member'
+    this.removeFamilyMemberButton = 'Remove'
 
   }
 
@@ -91,6 +92,15 @@ class CalculatorPage extends BasePage {
     await this.page.locator(this.incomFamilyMemberDD).click();
     await this.page.getByRole('option', { name: income }).click();
   }
+
+  async removeFamilyMember() {
+    await this.page.getByRole('button', { name: this.removeFamilyMemberButton }).click();
+  }
+
+  async getfamilyMemberAgeDD() {
+    return await this.page.locator(this.birthYearFamilyMemberDD);
+  }
+
 
 }
 

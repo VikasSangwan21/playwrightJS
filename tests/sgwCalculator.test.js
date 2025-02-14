@@ -120,7 +120,7 @@ test("Verify Errors for Incomplete Inputs", async ({ calculatorPage }) => {
   const errorMessages = calculatorPage.verfyErrorMessages(); 
 });
 
-// Verify Cash Assurance Payout is not displayed for age <20 with additional family member
+// Verify Cash Assurance Payout is not displayed for age <20 with ADDITIONAL FAMILY MEMBER
 test("Verify Cash Assurance Payout is not displayed for age <20 with additional family member", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.belowAgeLimit);
@@ -128,6 +128,17 @@ test("Verify Cash Assurance Payout is not displayed for age <20 with additional 
   await calculatorPage.submitForm();
   const payout = await calculatorPage.getCashAssurancePayoutElement();
   await expect(payout).not.toBeVisible();
+
+});
+
+//Add ADDITIONAL FAMILY MEMBER and Test delete Family Member
+test("Add ADDITIONAL FAMILY MEMBER and Test delete Family Member", async ({ calculatorPage }) => {
+  await calculatorPage.startCalculator();
+  await calculatorPage.enterUserDetails(testData.belowAgeLimit);
+  await calculatorPage.addFamilyMember(testData.familyMember1);
+  await calculatorPage.removeFamilyMember(testData.familyMember1);
+  const familyMemberDetails = await calculatorPage.getfamilyMemberAgeDD();
+  await expect(familyMemberDetails).not.toBeVisible();
 
 });
 
