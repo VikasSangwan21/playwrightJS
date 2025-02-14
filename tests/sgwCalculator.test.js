@@ -142,4 +142,14 @@ test("Add ADDITIONAL FAMILY MEMBER and Test delete Family Member", async ({ calc
 
 });
 
+//Failing scenario example
+test("Test example for failing tests", async ({ calculatorPage }) => {
+  await calculatorPage.startCalculator();
+  await calculatorPage.enterUserDetails(testData.invalidUser);
+  await calculatorPage.submitForm();
+  const payout = await calculatorPage.getCashAssurancePayoutElement();
+  await expect(payout).not.toBeVisible();
+
+});
+
 
