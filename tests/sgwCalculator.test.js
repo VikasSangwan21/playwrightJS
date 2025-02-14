@@ -4,18 +4,43 @@ const CalculatorPage = require("../pages/CalculatorPage");
 const testData = require("../testData/testData");
 const helpers = require("../utils/helpers");
 
-// Verify Cash Assurance Payout is not displayed for age <20
-test("Verify Cash Assurance Payout is not displayed for age <20", async ({ calculatorPage }) => {
-  await calculatorPage.startCalculator();
-  await calculatorPage.enterUserDetails(testData.belowAgeLimit);
-  await calculatorPage.submitForm();
-  const payout = await calculatorPage.getCashAssurancePayoutElement();
-  await expect(payout).not.toBeVisible();
+// NEGETIVE TESTS
+test.describe('Negative Tests', () => {
+  // Verify Cash Assurance Payout is not displayed for age <20
+  test("Verify Cash Assurance Payout is not displayed for age <20", async ({ calculatorPage }) => {
+    await calculatorPage.startCalculator();
+    await calculatorPage.enterUserDetails(testData.belowAgeLimit);
+    await calculatorPage.submitForm();
+    const payout = await calculatorPage.getCashAssurancePayoutElement();
+    await expect(payout).not.toBeVisible();
+
+  });
+
+  //Verify Errors for Incomplete Inputs 
+  test("Verify Errors for Incomplete Inputs", async ({ calculatorPage }) => {
+    await calculatorPage.startCalculator();
+    // Skip entering data in calculator form
+    await calculatorPage.submitForm();
+    // Verify Error messages are displayed for all fields
+    const errorMessages = calculatorPage.verfyErrorMessages(); 
+  });
+
+  // Verify Cash Assurance Payout is not displayed for age <20 with ADDITIONAL FAMILY MEMBER
+  test("Verify Cash Assurance Payout is not displayed for age <20 with additional family member", async ({ calculatorPage }) => {
+    await calculatorPage.startCalculator();
+    await calculatorPage.enterUserDetails(testData.belowAgeLimit);
+    await calculatorPage.addFamilyMember(testData.familyMember1);
+    await calculatorPage.submitForm();
+    const payout = await calculatorPage.getCashAssurancePayoutElement();
+    await expect(payout).not.toBeVisible();
+
+  });
 
 });
 
-//Age ≥ 20, Owns 0-1 property, Income ≤ $22,000, userset1
-test("Verify payout for user with 0-1 property and income ≤ $22,000", async ({ calculatorPage }) => {
+test.describe('Positive Tests', () => {
+  //Age ≥ 20, Owns 0-1 property, Income ≤ $22,000, userset1
+  test("Verify payout for user with 0-1 property and income ≤ $22,000", async ({ calculatorPage }) => {
     await calculatorPage.startCalculator();
     await calculatorPage.enterUserDetails(testData.validUser1);
     await calculatorPage.submitForm();
@@ -24,10 +49,10 @@ test("Verify payout for user with 0-1 property and income ≤ $22,000", async ({
     await calculatorPage.selectYear('2026');
     const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
     await helpers.validatePayout(testData.validUser1, '2026', payout2026); 
-});
+  });
 
-//Age ≥ 20, Owns 0-1 property, Income $22,001 - $34,000
-test("Verify payout for user with 0-1 property and income  $22,001 - $34,000", async ({ calculatorPage }) => {
+  //Age ≥ 20, Owns 0-1 property, Income $22,001 - $34,000
+  test("Verify payout for user with 0-1 property and income  $22,001 - $34,000", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.validUser2);
   await calculatorPage.submitForm();
@@ -36,10 +61,10 @@ test("Verify payout for user with 0-1 property and income  $22,001 - $34,000", a
   await calculatorPage.selectYear('2026');
   const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
   await helpers.validatePayout(testData.validUser2, '2026', payout2026);
-});
+  });
 
-//Age ≥ 20, Owns 0-1 property, Income $34,001 - $100,000
-test("Verify payout for user with 0-1 property and income $34,001 - $100,000", async ({ calculatorPage }) => {
+  //Age ≥ 20, Owns 0-1 property, Income $34,001 - $100,000
+  test("Verify payout for user with 0-1 property and income $34,001 - $100,000", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.validUser3);
   await calculatorPage.submitForm();
@@ -48,10 +73,10 @@ test("Verify payout for user with 0-1 property and income $34,001 - $100,000", a
   await calculatorPage.selectYear('2026');
   const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
   await helpers.validatePayout(testData.validUser3, '2026', payout2026);
-});
+  });
 
-//Age ≥ 20, Owns 0-1 property, Income > $100,000
-test("Verify payout for user with 0-1 property and income > $100,000", async ({ calculatorPage }) => {
+  //Age ≥ 20, Owns 0-1 property, Income > $100,000
+  test("Verify payout for user with 0-1 property and income > $100,000", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.validUser4);
   await calculatorPage.submitForm();
@@ -60,10 +85,10 @@ test("Verify payout for user with 0-1 property and income > $100,000", async ({ 
   await calculatorPage.selectYear('2026');
   const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
   await helpers.validatePayout(testData.validUser4, '2026', payout2026);
-});
+  });
 
-//Age ≥ 20, Owns more than 1 property, Income ≤ $22,000
-test("Verify payout for user with >1 property and income ≤ $22,000", async ({ calculatorPage }) => {
+  //Age ≥ 20, Owns more than 1 property, Income ≤ $22,000
+  test("Verify payout for user with >1 property and income ≤ $22,000", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.validUser5);
   await calculatorPage.submitForm();
@@ -72,11 +97,11 @@ test("Verify payout for user with >1 property and income ≤ $22,000", async ({ 
   await calculatorPage.selectYear('2026');
   const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
   await helpers.validatePayout(testData.validUser5, '2026', payout2026);
-});
+  });
 
 
-//Age ≥ 20, Owns more than 1 property, Income $22,001 - $34,000
-test("Verify payout for user with more than 1 property and income $22,001 - $34,000", async ({ calculatorPage }) => {
+  //Age ≥ 20, Owns more than 1 property, Income $22,001 - $34,000
+  test("Verify payout for user with more than 1 property and income $22,001 - $34,000", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.validUser6);
   await calculatorPage.submitForm();
@@ -85,10 +110,10 @@ test("Verify payout for user with more than 1 property and income $22,001 - $34,
   await calculatorPage.selectYear('2026');
   const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
   await helpers.validatePayout(testData.validUser6, '2026', payout2026);
-});
+  });
 
-//Age ≥ 20, Owns more than 1 property, Income $34,001 - $100,000
-test("Verify payout for user with more than 1 property, Income $34,001 - $100,000", async ({ calculatorPage }) => {
+  //Age ≥ 20, Owns more than 1 property, Income $34,001 - $100,000
+  test("Verify payout for user with more than 1 property, Income $34,001 - $100,000", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.validUser7);
   await calculatorPage.submitForm();
@@ -97,10 +122,10 @@ test("Verify payout for user with more than 1 property, Income $34,001 - $100,00
   await calculatorPage.selectYear('2026');
   const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
   await helpers.validatePayout(testData.validUser7, '2026', payout2026);
-});
+  });
 
-//Age ≥ 20, Owns more than 1 property, Income > $100,000
-test("Verify payout for user with >1 property and income > $100,000", async ({ calculatorPage }) => {
+  //Age ≥ 20, Owns more than 1 property, Income > $100,000
+  test("Verify payout for user with >1 property and income > $100,000", async ({ calculatorPage }) => {
   await calculatorPage.startCalculator();
   await calculatorPage.enterUserDetails(testData.validUser8);
   await calculatorPage.submitForm();
@@ -109,36 +134,18 @@ test("Verify payout for user with >1 property and income > $100,000", async ({ c
   await calculatorPage.selectYear('2026');
   const payout2026 = await calculatorPage.getCashAssurancePayout('2026');
   await helpers.validatePayout(testData.validUser8, '2026', payout2026);
-});
+  });
 
-//Verify Errors for Incomplete Inputs 
-test("Verify Errors for Incomplete Inputs", async ({ calculatorPage }) => {
-  await calculatorPage.startCalculator();
-  // Skip entering data in calculator form
-  await calculatorPage.submitForm();
-  // Verify Error messages are displayed for all fields
-  const errorMessages = calculatorPage.verfyErrorMessages(); 
-});
+  //Verify user is able to delete Family Member
+  test("Verify user is able to delete Family Member", async ({ calculatorPage }) => {
+    await calculatorPage.startCalculator();
+    await calculatorPage.enterUserDetails(testData.belowAgeLimit);
+    await calculatorPage.addFamilyMember(testData.familyMember1);
+    await calculatorPage.removeFamilyMember(testData.familyMember1);
+    const familyMemberDetails = await calculatorPage.getfamilyMemberAgeDD();
+    await expect(familyMemberDetails).not.toBeVisible();
 
-// Verify Cash Assurance Payout is not displayed for age <20 with ADDITIONAL FAMILY MEMBER
-test("Verify Cash Assurance Payout is not displayed for age <20 with additional family member", async ({ calculatorPage }) => {
-  await calculatorPage.startCalculator();
-  await calculatorPage.enterUserDetails(testData.belowAgeLimit);
-  await calculatorPage.addFamilyMember(testData.familyMember1);
-  await calculatorPage.submitForm();
-  const payout = await calculatorPage.getCashAssurancePayoutElement();
-  await expect(payout).not.toBeVisible();
-
-});
-
-//Add ADDITIONAL FAMILY MEMBER and Test delete Family Member
-test("Add ADDITIONAL FAMILY MEMBER and Test delete Family Member", async ({ calculatorPage }) => {
-  await calculatorPage.startCalculator();
-  await calculatorPage.enterUserDetails(testData.belowAgeLimit);
-  await calculatorPage.addFamilyMember(testData.familyMember1);
-  await calculatorPage.removeFamilyMember(testData.familyMember1);
-  const familyMemberDetails = await calculatorPage.getfamilyMemberAgeDD();
-  await expect(familyMemberDetails).not.toBeVisible();
+  });
 
 });
 
