@@ -1,5 +1,7 @@
 const BasePage = require("./BasePage");
 
+import { expect } from '@playwright/test';
+
 class CalculatorPage extends BasePage {
   constructor(page) {
     super(page);
@@ -16,6 +18,8 @@ class CalculatorPage extends BasePage {
     this.incomeDD = "#personalInfo\\.assessableIncome-container";
     this.housingDropdown = "[id=\"property\\.typeOfPropertyOfResidence-container\"] div";
     this.propertyOwnershipDD = "#property\\.ownsPropertyOfResidence-container"
+
+    this.errorMessage = 'text=This is a required field.'
   }
 
   async startCalculator() {
@@ -48,6 +52,7 @@ class CalculatorPage extends BasePage {
     await this.page.click(this.submitButton);
   }
 
+
   async getCashAssurancePayout(year) {
     if(year === '2025'){
       return await this.page.textContent(this.cashAssurancePackagePayoutAmount);
@@ -60,9 +65,22 @@ class CalculatorPage extends BasePage {
     return await this.page.locator(this.cashAssurancePackagePayoutAmount);
   }
 
+  async verfyErrorMessages() {
+    const errorMessages = await this.page.locator('text=This is a required field.');
+      //const errorMessages = calculatorPage.getErrorMessages(); 
+    
+      // Verify that exactly 4 elements are found
+      await expect(errorMessages).toHaveCount(4);
+    
+      // Verify all 4 elements are visible
+      for (let i = 0; i < 4; i++) {
+          await expect(errorMessages.nth(i)).toBeVisible();
+    }
+  }
+
   async selectYear(year) {
     await this.page.locator(`//button/span[text()='${year}']`).click();
-}
+  }
 
 }
 

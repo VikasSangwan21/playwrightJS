@@ -111,4 +111,13 @@ test("Verify payout for user with >1 property and income > $100,000", async ({ c
   await helpers.validatePayout(testData.validUser8, '2026', payout2026);
 });
 
+//Verify Errors for Incomplete Inputs 
+test("Verify Errors for Incomplete Inputs", async ({ calculatorPage }) => {
+  await calculatorPage.startCalculator();
+  // Skip entering data in calculator form
+  await calculatorPage.submitForm();
+  // Verify Error messages are displayed for all fields
+  const errorMessages = calculatorPage.verfyErrorMessages(); 
+});
+
 
