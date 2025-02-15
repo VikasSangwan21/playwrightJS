@@ -10,7 +10,7 @@ module.exports = {
     validUser9: { birthYear: "1985", income: "30000", multipleProperty: "Yes", housing: "4-room flat",propertyOwnership: "Rented from Open market"  },
     validUser10: { birthYear: "2000", income: "15000", multipleProperty: "Yes", housing: "3-room flat",propertyOwnership: "Rented from Open market"  },
     belowAgeLimit: { birthYear: "2005", income: "", multipleProperty: "No", housing: "4-room flat",propertyOwnership: "Rented from Open market" },
-    invalidUser: { birthYear: "", income: "-5000", multipleProperty: "", housing: "",propertyOwnership: ""  },
+    invalidUser: { birthYear: "abxc", income: "-5000", multipleProperty: "", housing: "",propertyOwnership: ""  },
     missingYOB: { birthYear: "", income: "$22,000 and below or No income", multipleProperty: "No", housing: "4-room flat",propertyOwnership: "Rented from Open market" },
     missingAI: { birthYear: "1999", income: "", multipleProperty: "No", housing: "4-room flat",propertyOwnership: "Rented from Open market" },
     missingPropertyOwnership: { birthYear: "1999", income: "$22,000 and below or No income", multipleProperty: "No", housing: "",propertyOwnership: "Rented from Open market" },
