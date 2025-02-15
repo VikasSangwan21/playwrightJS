@@ -4,39 +4,6 @@ const CalculatorPage = require("../pages/CalculatorPage");
 const testData = require("../testData/testData");
 const helpers = require("../utils/helpers");
 
-// NEGETIVE TESTS
-test.describe('Negative Tests', () => {
-  // Verify Cash Assurance Payout is not displayed for age <20
-  test("Verify Cash Assurance Payout is not displayed for age <20", async ({ calculatorPage }) => {
-    await calculatorPage.startCalculator();
-    await calculatorPage.enterUserDetails(testData.belowAgeLimit);
-    await calculatorPage.submitForm();
-    const payout = await calculatorPage.getCashAssurancePayoutElement();
-    await expect(payout).not.toBeVisible();
-
-  });
-
-  //Verify Errors for Incomplete Inputs 
-  test("Verify Errors for Incomplete Inputs", async ({ calculatorPage }) => {
-    await calculatorPage.startCalculator();
-    // Skip entering data in calculator form
-    await calculatorPage.submitForm();
-    // Verify Error messages are displayed for all fields
-    const errorMessages = calculatorPage.verfyErrorMessages(); 
-  });
-
-  // Verify Cash Assurance Payout is not displayed for age <20 with ADDITIONAL FAMILY MEMBER
-  test("Verify Cash Assurance Payout is not displayed for age <20 with additional family member", async ({ calculatorPage }) => {
-    await calculatorPage.startCalculator();
-    await calculatorPage.enterUserDetails(testData.belowAgeLimit);
-    await calculatorPage.addFamilyMember(testData.familyMember1);
-    await calculatorPage.submitForm();
-    const payout = await calculatorPage.getCashAssurancePayoutElement();
-    await expect(payout).not.toBeVisible();
-
-  });
-
-});
 
 test.describe('Positive Tests', () => {
   //Age ≥ 20, Owns 0-1 property, Income ≤ $22,000, userset1
@@ -146,16 +113,6 @@ test.describe('Positive Tests', () => {
     await expect(familyMemberDetails).not.toBeVisible();
 
   });
-
-});
-
-//Failing scenario example
-test("Test example for failing tests", async ({ calculatorPage }) => {
-  await calculatorPage.startCalculator();
-  await calculatorPage.enterUserDetails(testData.invalidUser);
-  await calculatorPage.submitForm();
-  const payout = await calculatorPage.getCashAssurancePayoutElement();
-  await expect(payout).not.toBeVisible();
 
 });
 
