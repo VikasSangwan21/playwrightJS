@@ -49,41 +49,63 @@ test.describe('Negative Tests', () => {
     //Verify unable to submit form without AI Input
     test("Verify unable to submit form without Annual Income for age> 20 user", async ({ calculatorPage }) => {
     await calculatorPage.startCalculator();
-    // Skip entering Year of Birth in calculator form
+    // Skip entering AI in calculator form
     await calculatorPage.enterUserDetails(testData.missingAI);
     await calculatorPage.submitForm();
-    // Verify Error messages is displayed for YOB
+    // Verify Error messages is displayed for AI
     const errorMessages = calculatorPage.verfyErrorMessages(1); 
   });
 
   //Verify unable to submit form without property ownership
   test("Verify unable to submit form without property ownership", async ({ calculatorPage }) => {
     await calculatorPage.startCalculator();
-    // Skip entering Year of Birth in calculator form
+    // Skip entering property ownership in calculator form
     await calculatorPage.enterUserDetails(testData.missingPropertyOwnership);
     await calculatorPage.submitForm();
-    // Verify Error messages is displayed for YOB
+    // Verify Error messages is displayed for property ownership
     const errorMessages = calculatorPage.verfyErrorMessages(1); 
   });
 
   //Verify unable to submit form without HOUSING TYPE input
   test("Verify unable to submit form without housing time", async ({ calculatorPage }) => {
     await calculatorPage.startCalculator();
-    // Skip entering Year of Birth in calculator form
+    // Skip entering HOUSING TYPE in calculator form
     await calculatorPage.enterUserDetails(testData.missingHousing);
+    await calculatorPage.submitForm();
+    // Verify Error messages is displayed for HOUSING TYPE
+    const errorMessages = calculatorPage.verfyErrorMessages(1); 
+  });
+
+  //Verify unable to submit form without multiple properties details
+  test("Verify unable to submit form without multiple properties details", async ({ calculatorPage }) => {
+      await calculatorPage.startCalculator();
+      // Skip entering multiple properties in calculator form
+      await calculatorPage.enterUserDetails(testData.missingMultipleOwnership);
+      await calculatorPage.submitForm();
+      // Verify Error messages is displayed for multiple properties
+      const errorMessages = calculatorPage.verfyErrorMessages(1); 
+  });
+
+  //Verify unable to submit form without YOB household member
+  test("Verify unable to submit form without YOB household member", async ({ calculatorPage }) => {
+    await calculatorPage.startCalculator();
+    await calculatorPage.enterUserDetails(testData.belowAgeLimit);
+    // add family member without year of birth
+    await calculatorPage.addFamilyMember(testData.missingYOB);
     await calculatorPage.submitForm();
     // Verify Error messages is displayed for YOB
     const errorMessages = calculatorPage.verfyErrorMessages(1); 
   });
 
-    //Verify unable to submit form without multiple properties details
-    test("Verify unable to submit form without multiple properties details", async ({ calculatorPage }) => {
-      await calculatorPage.startCalculator();
-      // Skip entering Year of Birth in calculator form
-      await calculatorPage.enterUserDetails(testData.missingMultipleOwnership);
-      await calculatorPage.submitForm();
-      // Verify Error messages is displayed for YOB
-      const errorMessages = calculatorPage.verfyErrorMessages(1); 
+  //Verify unable to submit form without AI household member
+  test("Verify unable to submit form without AI household member", async ({ calculatorPage }) => {
+    await calculatorPage.startCalculator();
+    await calculatorPage.enterUserDetails(testData.belowAgeLimit);
+    // add family member without AI
+    await calculatorPage.addFamilyMember(testData.missingAI);
+    await calculatorPage.submitForm();
+    // Verify Error messages is displayed for AI
+    const errorMessages = calculatorPage.verfyErrorMessages(1); 
   });
 
 });

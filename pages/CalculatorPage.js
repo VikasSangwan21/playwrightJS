@@ -97,10 +97,14 @@ class CalculatorPage extends BasePage {
 
   async addFamilyMember({ birthYear, income, multipleProperty, housing, propertyOwnership }) {
     await this.page.getByRole('button', { name: this.addFamilyMemberButton }).click();
-    await this.page.locator(this.birthYearFamilyMemberDD).click();
-    await this.page.getByText(birthYear).click();
-    await this.page.locator(this.incomFamilyMemberDD).click();
-    await this.page.getByRole('option', { name: income }).click();
+    if(birthYear !== ""){
+      await this.page.locator(this.birthYearFamilyMemberDD).click();
+      await this.page.getByText(birthYear).click();
+      if(income !== ""){
+        await this.page.locator(this.incomFamilyMemberDD).click();
+        await this.page.getByRole('option', { name: income }).click();
+      }
+    }
   }
 
   async removeFamilyMember() {
