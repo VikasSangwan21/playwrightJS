@@ -58,6 +58,7 @@ npm run test  - For tests only on all browsers
 #### Playwright Test Report 
 
 ```bash
+npx playwright show-report
 Html-test-report :
 npm run test:chrome (OR)  npm run test:edge (OR) npm run html-report
 ```
@@ -68,5 +69,7 @@ npm run test:chrome (OR)  npm run test:edge (OR) npm run html-report
 - Video recording for failing tests
 - CI integration implemented with jenkins
 - Page object model
+- Cross browser support (Chrome, Firefox, edge, safari)
+- Headless Execution
 - Separate Test Data files for easy maintenance
 - Reusable fixtures for scalability
